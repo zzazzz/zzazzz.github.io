@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ziyad Muhammad Adzin Azzufari — Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e0c;--bg2:#111814;--bg3:#161d19;--bg4:#1a2219;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --accent:#1dbd88;--accent2:#0f6e56;--accent-dim:rgba(29,189,136,0.12);
+  --text:#e8ede9;--text2:#8fa396;--text3:#566b61;
+  --mono:'Space Mono',monospace;--sans:'DM Sans',sans-serif;
+  --r:10px;--rsm:6px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+.glow{position:fixed;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(29,189,136,0.055) 0%,transparent 70%);top:-250px;right:-200px;pointer-events:none;z-index:0}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;border-bottom:1px solid var(--border);background:rgba(10,14,12,0.88);backdrop-filter:blur(14px)}
+.nav-inner{max-width:920px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none;letter-spacing:.06em}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:11px;color:var(--text2);text-decoration:none;padding:5px 11px;border-radius:var(--rsm);letter-spacing:.05em;transition:all .15s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accent-dim)}
+
+/* HERO */
+.hero{padding:80px 0 64px;border-bottom:1px solid var(--border);animation:fadeUp .6s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.hero-tag::before{content:'';display:inline-block;width:24px;height:1px;background:var(--accent)}
+.hero-name{font-family:var(--mono);font-size:clamp(30px,5vw,56px);font-weight:700;line-height:1.05;color:var(--text);margin-bottom:8px}
+.hero-name .ac{color:var(--accent)}
+.hero-title{font-family:var(--mono);font-size:clamp(13px,2vw,17px);color:var(--text2);margin-bottom:28px}
+.hero-bio{font-size:15px;color:var(--text2);max-width:560px;line-height:1.8;margin-bottom:32px}
+.hero-bio strong{color:var(--text);font-weight:500}
+.hero-contacts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.contact-link{font-family:var(--mono);font-size:11px;color:var(--text2);text-decoration:none;border:1px solid var(--border2);padding:6px 13px;border-radius:var(--rsm);letter-spacing:.03em;transition:all .15s;display:flex;align-items:center;gap:5px}
+.contact-link:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-dim)}
+.hero-skills{display:flex;flex-wrap:wrap;gap:7px}
+.spill{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);color:var(--text3);background:var(--bg2)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:40px 0;animation:fadeUp .6s .15s ease both}
+.stat{background:var(--bg2);padding:20px 16px;text-align:center}
+.stat-n{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent);display:block;line-height:1;margin-bottom:5px}
+.stat-l{font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:.05em}
+
+/* TABS */
+.tabs-wrap{animation:fadeUp .6s .2s ease both}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:36px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:12px 18px;background:none;border:none;color:var(--text3);cursor:pointer;position:relative;white-space:nowrap;transition:color .15s}
+.tab-btn::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .2s}
+.tab-btn:hover{color:var(--text2)}
+.tab-btn.active{color:var(--accent)}
+.tab-btn.active::after{transform:scaleX(1)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.slabel{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.slabel::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* EXPERIENCE */
+.exp-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:12px;transition:border-color .15s}
+.exp-card:hover{border-color:var(--border2)}
+.exp-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+.exp-role{font-size:15px;font-weight:500;color:var(--text)}
+.exp-period{font-family:var(--mono);font-size:10px;color:var(--accent);border:1px solid var(--accent2);padding:3px 9px;border-radius:4px;white-space:nowrap;background:var(--accent-dim)}
+.exp-co{font-family:var(--mono);font-size:11px;color:var(--text2);margin-bottom:3px}
+.exp-loc{font-size:12px;color:var(--text3);margin-bottom:14px}
+.exp-ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.exp-ul li{font-size:13px;color:var(--text2);padding-left:14px;position:relative;line-height:1.6}
+.exp-ul li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:10px;top:4px}
+.hl{color:var(--accent);font-weight:500}
+
+/* PROJECT GRID */
+.filter-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.fbtn{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border2);border-radius:4px;background:transparent;color:var(--text3);cursor:pointer;transition:all .15s}
+.fbtn:hover{color:var(--text2)}
+.fbtn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:11px}
+.pcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:11px;transition:border-color .2s,transform .2s;cursor:pointer;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .2s;transform-origin:left}
+.pcard:hover{border-color:var(--accent);transform:translateY(-3px)}
+.pcard:hover::before{transform:scaleX(1)}
+.card-top{display:flex;align-items:center;justify-content:space-between}
+.cicon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.crepo{font-family:var(--mono);font-size:10px;color:var(--text3);word-break:break-all;text-align:right}
+.ctitle{font-size:14px;font-weight:500;color:var(--text);line-height:1.3}
+.cdesc{font-size:12px;color:var(--text2);line-height:1.6;flex:1}
+.cmetric{font-family:var(--mono);font-size:11px;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent2);border-radius:4px;padding:3px 8px;display:inline-block}
+.ctags{display:flex;flex-wrap:wrap;gap:5px}
+.ctag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:3px;background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+.cfoot{display:flex;align-items:center;justify-content:space-between;padding-top:9px;border-top:1px solid var(--border)}
+.cbadge{font-family:var(--mono);font-size:10px;padding:3px 7px;border-radius:3px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.b-ml{background:rgba(29,189,136,.12);color:var(--accent)}
+.b-cv{background:rgba(239,159,39,.12);color:#ef9f27}
+.b-nlp{background:rgba(55,138,221,.12);color:#378add}
+.b-an{background:rgba(127,119,221,.12);color:#7f77dd}
+.b-rc{background:rgba(212,83,126,.12);color:#d4537e}
+.clink{font-family:var(--mono);font-size:11px;color:var(--text3);text-decoration:none;transition:color .15s}
+.clink:hover{color:var(--accent)}
+.hidden{display:none!important}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(6px)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;width:100%;max-width:720px;max-height:88vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .25s;scrollbar-width:thin;scrollbar-color:var(--border2) transparent}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal::-webkit-scrollbar{width:4px}
+.modal::-webkit-scrollbar-track{background:transparent}
+.modal::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.modal-head{padding:28px 28px 0;position:sticky;top:0;background:var(--bg2);z-index:2;border-bottom:1px solid var(--border)}
+.modal-close{position:absolute;top:20px;right:20px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.modal-close:hover{color:var(--text);border-color:var(--border2)}
+.modal-badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.modal-title{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.2}
+.modal-repo{font-family:var(--mono);font-size:11px;color:var(--text3);margin-bottom:16px}
+.modal-body{padding:24px 28px 28px}
+.modal-section{margin-bottom:22px}
+.modal-section-title{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.modal-desc{font-size:14px;color:var(--text2);line-height:1.75}
+.modal-metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.modal-metric-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.modal-metric-label{font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:4px}
+.modal-metric-val{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--accent)}
+.modal-tags{display:flex;flex-wrap:wrap;gap:6px}
+.modal-tag{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:4px;background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.modal-links{display:flex;flex-wrap:wrap;gap:8px}
+.modal-link-btn{font-family:var(--mono);font-size:11px;padding:7px 16px;border-radius:6px;text-decoration:none;transition:all .15s;display:flex;align-items:center;gap:6px;cursor:pointer}
+.modal-link-btn.primary{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent)}
+.modal-link-btn.primary:hover{background:rgba(29,189,136,.2)}
+.modal-link-btn.secondary{background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
+.modal-link-btn.secondary:hover{color:var(--text);border-color:var(--border2)}
+.modal-highlight{background:var(--bg3);border-left:2px solid var(--accent);border-radius:0 6px 6px 0;padding:12px 14px;font-size:13px;color:var(--text2);line-height:1.7}
+.modal-highlight strong{color:var(--accent);font-weight:500}
+.modal-ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.modal-ul li{font-size:13px;color:var(--text2);padding-left:14px;position:relative;line-height:1.6}
+.modal-ul li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:10px;top:4px}
+
+/* DASHBOARD TAB */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:20px}
+.dmet{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.dmet-l{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
+.dmet-v{font-family:var(--mono);font-size:24px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:3px}
+.dmet-s{font-size:12px;color:var(--text3)}
+.dcrd{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:11px}
+.dcrd h3{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.sbar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.sbar-l{font-family:var(--mono);font-size:11px;color:var(--text2);min-width:100px}
+.sbar-t{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.sbar-f{height:100%;background:var(--accent);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.sbar-p{font-family:var(--mono);font-size:10px;color:var(--text3);min-width:30px;text-align:right}
+.cbars{display:flex;align-items:flex-end;gap:8px;height:80px}
+.cbar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
+.cbar-f{width:100%;border-radius:3px 3px 0 0;transition:height 1s cubic-bezier(.16,1,.3,1);min-height:4px}
+.cbar-lbl{font-family:var(--mono);font-size:9px;color:var(--text3);text-align:center;line-height:1.3}
+
+/* SKILLS TAB */
+.skgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:11px;margin-bottom:28px}
+.skgrp{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.skgrp-t{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:11px}
+.sklst{display:flex;flex-wrap:wrap;gap:6px}
+.sktag{font-size:12px;color:var(--text2);background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 8px}
+
+/* ABOUT */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.acrd{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.acrd-t{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.cert-i{border-bottom:1px solid var(--border);padding:10px 0;font-size:13px;color:var(--text2)}
+.cert-i:last-child{border-bottom:none}
+.cert-o{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:2px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-align:center}
+.foot-n{font-family:var(--mono);font-size:12px;color:var(--text3);margin-bottom:10px}
+.foot-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.foot-link{font-family:var(--mono);font-size:11px;color:var(--text3);text-decoration:none;transition:color .15s}
+.foot-link:hover{color:var(--accent)}
+
+@media(max-width:640px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .dgrid{grid-template-columns:1fr 1fr}
+  .agrid{grid-template-columns:1fr}
+  .nav-links a{padding:5px 7px}
+  .hero{padding:48px 0 40px}
+  .modal-head,.modal-body{padding:20px 18px 0}
+  .modal-body{padding:18px}
+}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">ziyad.azzufari</a>
+    <ul class="nav-links">
+      <li><a onclick="switchTab('about')">About</a></li>
+      <li><a onclick="switchTab('experience')">Experience</a></li>
+      <li><a onclick="switchTab('projects')">Projects</a></li>
+      <li><a onclick="switchTab('dashboard')">Dashboard</a></li>
+      <li><a onclick="switchTab('skills')">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-tag">Data Scientist &amp; ML Engineer</p>
+    <h1 class="hero-name">Ziyad Muhammad<br>Adzin <span class="ac">Azzufari</span></h1>
+    <p class="hero-title">// turning data into decisions</p>
+    <p class="hero-bio">
+      Analytical data professional with a <strong>Mathematics degree (GPA 3.75/4.00)</strong> and real-world experience in <strong>machine learning, computer vision, NLP,</strong> and <strong>insurance analytics</strong>. Previously Reinsurance Facultative Data Analyst at <strong>PT BRI Asuransi Indonesia</strong> — handling 20M+ row datasets, automating 5,000+ certificates, and building end-to-end ML pipelines from research to production.
+    </p>
+    <div class="hero-contacts">
+      <a class="contact-link" href="mailto:ziyad.azzufari@gmail.com">✉ ziyad.azzufari@gmail.com</a>
+      <a class="contact-link" href="https://linkedin.com/in/ziyad-muhammad-adzin-azzufari/" target="_blank">in LinkedIn</a>
+      <a class="contact-link" href="https://github.com/zzazzz" target="_blank">⌥ github.com/zzazzz</a>
+      <a class="contact-link">📍 Serang, Banten</a>
+    </div>
+    <div class="hero-skills">
+      <span class="spill">Python</span><span class="spill">SQL</span><span class="spill">Machine Learning</span><span class="spill">Deep Learning</span><span class="spill">Computer Vision</span><span class="spill">NLP / LLM</span><span class="spill">MLOps</span><span class="spill">Power BI</span><span class="spill">Tableau</span><span class="spill">GCP · AWS · Docker</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><span class="stat-n">15</span><span class="stat-l">Projects</span></div>
+    <div class="stat"><span class="stat-n">20M+</span><span class="stat-l">Rows handled</span></div>
+    <div class="stat"><span class="stat-n">3.75</span><span class="stat-l">GPA / 4.00</span></div>
+    <div class="stat"><span class="stat-n">99.5%</span><span class="stat-l">Best mAP50</span></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs">
+      <button class="tab-btn active" onclick="switchTab('about')">About</button>
+      <button class="tab-btn" onclick="switchTab('experience')">Experience</button>
+      <button class="tab-btn" onclick="switchTab('projects')">Projects</button>
+      <button class="tab-btn" onclick="switchTab('dashboard')">Dashboard</button>
+      <button class="tab-btn" onclick="switchTab('skills')">Skills</button>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="tab-panel active" id="panel-about">
+      <p class="slabel">Education &amp; Certifications</p>
+      <div class="agrid">
+        <div class="acrd">
+          <p class="acrd-t">Education</p>
+          <div class="cert-i">
+            <div style="font-weight:500;color:var(--text);font-size:14px;">University of Lampung</div>
+            <div class="cert-o">Bachelor of Mathematics · Sep 2020 – Nov 2024</div>
+            <div class="cert-o" style="color:var(--accent);margin-top:3px;">GPA: 3.75 / 4.00</div>
+            <div style="font-size:12px;color:var(--text2);margin-top:8px;line-height:1.6;">Thesis: <em>YOLO Model and Transformers for Vehicle License Plate Detection and OCR.</em> Also served as Assistant Lecturer for "Introduction to Data Mining."</div>
+          </div>
+        </div>
+        <div class="acrd">
+          <p class="acrd-t">Certifications &amp; Bootcamps</p>
+          <div class="cert-i">
+            <div style="font-weight:500;color:var(--text);font-size:13px;">Machine Learning Trainee</div>
+            <div class="cert-o">Bangkit Academy (Google, GoTo, Traveloka) · Aug 2023 – Feb 2024</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:3px;">DeepLearning.AI TensorFlow Developer + ML Specialization</div>
+          </div>
+          <div class="cert-i">
+            <div style="font-weight:500;color:var(--text);font-size:13px;">Data Analyst Trainee</div>
+            <div class="cert-o">Digital Talent Scholarship – Kominfo · Apr 2024 – Jul 2024</div>
+          </div>
+          <div class="cert-i">
+            <div style="font-weight:500;color:var(--text);font-size:13px;">Regular Security Analyst</div>
+            <div class="cert-o">LSP Pasar Modal · Apr 2024 – Apr 2027</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:3px;">Macroeconomic Analysis · Securities Analysis · Chart Construction · Price Trend Analysis</div>
+          </div>
+        </div>
+      </div>
+      <p class="slabel" style="margin-top:28px;">Professional Summary</p>
+      <div class="acrd">
+        <p style="font-size:14px;color:var(--text2);line-height:1.85;">
+          Data professional combining a strong <strong style="color:var(--text)">Mathematics background</strong> with real-world experience in <strong style="color:var(--text)">insurance reinsurance analytics</strong> and cutting-edge <strong style="color:var(--text)">machine learning</strong>. Systems I've built achieve 99.5% mAP50 in object detection and 100% accuracy in gesture classification. I've analyzed 68K+ headlines with LLMs, processed 20M+ insurance data rows, and automated 5,000+ certificate workflows. My work spans production MLOps pipelines, domain-specific financial analytics, and interactive public dashboards.
+        </p>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="tab-panel" id="panel-experience">
+      <p class="slabel">Work Experience</p>
+      <div class="exp-card">
+        <div class="exp-hd">
+          <div><div class="exp-role">Reinsurance Facultative Data Analyst</div><div class="exp-co">PT BRI Asuransi Indonesia</div><div class="exp-loc">📍 Pancoran, Jakarta</div></div>
+          <span class="exp-period">Jan 2025 – Jan 2026</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Managed end-to-end facultative reinsurance placement for corporate risks — risk assessment, reinsurer selection, negotiation, compliance with minimum <span class="hl">BBB rating (AM Best)</span>.</li>
+          <li>Extracted, processed, and analyzed large-scale reinsurance data (<span class="hl">up to 20M+ rows</span>) using SQL Server and Python for strategic reporting and decision-making.</li>
+          <li>Negotiated reinsurance commissions with global reinsurers, achieving <span class="hl">25–35% commission rate</span>, improving portfolio profitability.</li>
+          <li>Developed Python-based Business Performance Reports (BPR) covering premiums, claims, aging, segmentation, and SLA in PowerPoint.</li>
+          <li>Built forecasting models for <span class="hl">12-month reinsurance premium payment planning</span> and renewal pipeline estimation.</li>
+          <li>Automated management of <span class="hl">5,000+ reinsurance certificates and slips</span>, reducing manual work and minimizing errors.</li>
+          <li>Conducted earthquake insurance analysis comparing internal retention vs. MAIPARK autofacultative (45% commission) using loss ratio.</li>
+          <li>Prepared BoD memorandums for high-risk/high-exposure placements and contributed to facultative SOP development.</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-hd">
+          <div><div class="exp-role">Production Planning and Control (Intern)</div><div class="exp-co">PT Krakatau Steel</div><div class="exp-loc">📍 Bandar Lampung, Lampung</div></div>
+          <span class="exp-period">Jan 2023 – Feb 2023</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Performed production forecasting using <span class="hl">ARIMA models in R-Studio</span> to support planning for Cold Rolling Mill operations.</li>
+          <li>Analyzed and visualized production data to deliver actionable insights and reporting for management decision-making.</li>
+        </ul>
+      </div>
+      <p class="slabel" style="margin-top:28px;">Training &amp; Bootcamps</p>
+      <div class="exp-card">
+        <div class="exp-hd">
+          <div><div class="exp-role">Machine Learning Trainee</div><div class="exp-co">Bangkit Academy by Google, GoTo &amp; Traveloka</div></div>
+          <span class="exp-period">Aug 2023 – Feb 2024</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Intensive ML training — TensorFlow, Computer Vision, NLP, and ML deployment.</li>
+          <li>Earned <span class="hl">DeepLearning.AI TensorFlow Developer Professional Certificate</span> and ML Specialization.</li>
+          <li>Capstone: image-based traffic violation detection system using YOLOv8 and TrOCR.</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-hd">
+          <div><div class="exp-role">Data Analyst Trainee</div><div class="exp-co">Digital Talent Scholarship – Kominfo</div></div>
+          <span class="exp-period">Apr 2024 – Jul 2024</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Advanced data analytics — data preparation, cleaning, and analysis in R.</li>
+          <li>Developed data visualization and storytelling skills for stakeholder communication.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="tab-panel" id="panel-projects">
+      <div class="filter-bar">
+        <button class="fbtn active" onclick="filterProj('all',this)">All (15)</button>
+        <button class="fbtn" onclick="filterProj('cv',this)">Computer Vision</button>
+        <button class="fbtn" onclick="filterProj('nlp',this)">NLP</button>
+        <button class="fbtn" onclick="filterProj('ml',this)">Machine Learning</button>
+        <button class="fbtn" onclick="filterProj('an',this)">Analytics</button>
+        <button class="fbtn" onclick="filterProj('rc',this)">Rekomendasi</button>
+      </div>
+      <div class="pgrid" id="pgrid">
+
+        <div class="pcard" data-cat="cv" onclick="openModal('plate')">
+          <div class="card-top"><div class="cicon" style="background:rgba(239,159,39,.12)">🏍️</div><span class="crepo">pelanggaran-kendaraan-motor</span></div>
+          <p class="ctitle">License Plate Recognition & Violation Detection</p>
+          <p class="cdesc">YOLOv8 + TrOCR pipeline for automated vehicle violation detection. Thesis project.</p>
+          <div><span class="cmetric">mAP50: 99.5% · CER: 1.1%</span></div>
+          <div class="ctags"><span class="ctag">YOLOv8</span><span class="ctag">TrOCR</span><span class="ctag">CI/CD</span></div>
+          <div class="cfoot"><span class="cbadge b-cv">Computer Vision</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="cv" onclick="openModal('asl')">
+          <div class="card-top"><div class="cicon" style="background:rgba(239,159,39,.12)">🤟</div><span class="crepo">America-sign-language</span></div>
+          <p class="ctitle">American Sign Language Recognition</p>
+          <p class="cdesc">ViT vs Swin Transformer for 29-category ASL. Real-time GUI in Python.</p>
+          <div><span class="cmetric">Swin: Acc 100% · F1: 1.0000</span></div>
+          <div class="ctags"><span class="ctag">ViT</span><span class="ctag">Swin Transformer</span><span class="ctag">Real-time</span></div>
+          <div class="cfoot"><span class="cbadge b-cv">Computer Vision</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="cv" onclick="openModal('trashnet')">
+          <div class="card-top"><div class="cicon" style="background:rgba(239,159,39,.12)">🗑️</div><span class="crepo">trashnet</span></div>
+          <p class="ctitle">TrashNet — Waste Classification</p>
+          <p class="cdesc">ResNet50 vs Swin Transformer for 6-class waste classification. Full CI/CD pipeline on GitHub Actions + Kaggle GPU.</p>
+          <div><span class="cmetric">Swin F1: 98.82% · Acc: 98.82%</span></div>
+          <div class="ctags"><span class="ctag">Swin</span><span class="ctag">ResNet50</span><span class="ctag">HuggingFace</span><span class="ctag">WandB</span></div>
+          <div class="cfoot"><span class="cbadge b-cv">Computer Vision</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="cv" onclick="openModal('tflite')">
+          <div class="card-top"><div class="cicon" style="background:rgba(239,159,39,.12)">📱</div><span class="crepo">CNN-asl-tflite</span></div>
+          <p class="ctitle">ASL Recognition — TFLite Mobile</p>
+          <p class="cdesc">CNN optimized with TensorFlow Lite for edge/mobile deployment. Lightweight gesture recognition.</p>
+          <div class="ctags"><span class="ctag">TFLite</span><span class="ctag">CNN</span><span class="ctag">Mobile ML</span></div>
+          <div class="cfoot"><span class="cbadge b-cv">Computer Vision</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="cv" onclick="openModal('cancer')">
+          <div class="card-top"><div class="cicon" style="background:rgba(239,159,39,.12)">🩺</div><span class="crepo">breast-cancer</span></div>
+          <p class="ctitle">Image Segmentation — Medical Data</p>
+          <p class="cdesc">YOLO11x-seg (491 layers, 62M params) instance segmentation of breast cancer images on 154 validation images.</p>
+          <div><span class="cmetric">Overall mAP50: 87.5%</span></div>
+          <div class="ctags"><span class="ctag">YOLO11x-seg</span><span class="ctag">Segmentation</span><span class="ctag">Medical AI</span></div>
+          <div class="cfoot"><span class="cbadge b-cv">Computer Vision</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="nlp" onclick="openModal('jokowi')">
+          <div class="card-top"><div class="cicon" style="background:rgba(55,138,221,.12)">📰</div><span class="crepo">jokowi-sentiment</span></div>
+          <p class="ctitle">Jokowi Sentiment Analysis (2019–2024)</p>
+          <p class="cdesc">68K+ headlines scraped via Selenium, labeled with Gemma 2 9B Instruct. Live Streamlit dashboard.</p>
+          <div><span class="cmetric">68,000+ headlines · 5 years</span></div>
+          <div class="ctags"><span class="ctag">Gemma 2 9B</span><span class="ctag">Streamlit</span><span class="ctag">Selenium</span></div>
+          <div class="cfoot"><span class="cbadge b-nlp">NLP</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="nlp" onclick="openModal('nasdaq')">
+          <div class="card-top"><div class="cicon" style="background:rgba(55,138,221,.12)">📊</div><span class="crepo">NASDAQ-PREDICTION</span></div>
+          <p class="ctitle">NASDAQ Prediction + Fed Rate Sentiment</p>
+          <p class="cdesc">21,476+ headlines analyzed with Gemma 2 9B. LSTM forecasting with DXY Price, Fed Funds Rate, and sentiment features.</p>
+          <div><span class="cmetric">21,476 headlines · LSTM</span></div>
+          <div class="ctags"><span class="ctag">LSTM</span><span class="ctag">Gemma 2 9B</span><span class="ctag">Time Series</span></div>
+          <div class="cfoot"><span class="cbadge b-nlp">NLP</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="ml" onclick="openModal('cvscreen')">
+          <div class="card-top"><div class="cicon" style="background:rgba(29,189,136,.12)">🤖</div><span class="crepo">cv-screening-with-gemini</span></div>
+          <p class="ctitle">AI CV Screener with Gemini</p>
+          <p class="cdesc">Automated recruitment system with scoring, deep-dive analysis, and insights dashboard. Powered by Google Gemini AI.</p>
+          <div class="ctags"><span class="ctag">Gemini API</span><span class="ctag">FastAPI</span><span class="ctag">Chart.js</span></div>
+          <div class="cfoot"><span class="cbadge b-ml">Machine Learning</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="ml" onclick="openModal('mlops')">
+          <div class="card-top"><div class="cicon" style="background:rgba(29,189,136,.12)">⚙️</div><span class="crepo">tugas-akhir-mlops</span></div>
+          <p class="ctitle">MLOps — Heart Disease Prediction</p>
+          <p class="cdesc">End-to-end MLOps: TFX pipeline, Railway deployment, Prometheus + Grafana monitoring. BinaryAccuracy: 84.3%, AUC: 86.3%.</p>
+          <div><span class="cmetric">AUC: 86.3% · Deployed on Railway</span></div>
+          <div class="ctags"><span class="ctag">TFX</span><span class="ctag">Railway</span><span class="ctag">Prometheus</span><span class="ctag">Grafana</span></div>
+          <div class="cfoot"><span class="cbadge b-ml">Machine Learning</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="ml" onclick="openModal('credit')">
+          <div class="card-top"><div class="cicon" style="background:rgba(29,189,136,.12)">💳</div><span class="crepo">credit-scoring-app</span></div>
+          <p class="ctitle">Credit Scoring App</p>
+          <p class="cdesc">Web-based credit worthiness scoring for non-technical users, built on ML classification. Full pipeline from data to web app.</p>
+          <div class="ctags"><span class="ctag">Fintech</span><span class="ctag">Web App</span><span class="ctag">Classification</span></div>
+          <div class="cfoot"><span class="cbadge b-ml">Machine Learning</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="ml" onclick="openModal('belajar')">
+          <div class="card-top"><div class="cicon" style="background:rgba(29,189,136,.12)">🏢</div><span class="crepo">Belajar-Penerapan-Data-Science</span></div>
+          <p class="ctitle">Employee Attrition Analysis — Jaya Jaya Maju</p>
+          <p class="cdesc">HR analytics: attrition rate 16.93% from 1,058 employees. AdaBoost model + Looker Studio dashboard with 18 KPI views.</p>
+          <div><span class="cmetric">Attrition: 16.93% · 1,058 employees</span></div>
+          <div class="ctags"><span class="ctag">AdaBoost</span><span class="ctag">Looker Studio</span><span class="ctag">Streamlit</span></div>
+          <div class="cfoot"><span class="cbadge b-ml">Machine Learning</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="ml" onclick="openModal('proyek')">
+          <div class="card-top"><div class="cicon" style="background:rgba(29,189,136,.12)">🎓</div><span class="crepo">Proyek-akhir-belajar-penerapan-data-science</span></div>
+          <p class="ctitle">Student Dropout Prediction — Jaya Jaya Institut</p>
+          <p class="cdesc">ML model to predict student dropout risk based on demographics, academics, and socioeconomic factors. Deployed on Streamlit.</p>
+          <div class="ctags"><span class="ctag">Classification</span><span class="ctag">Streamlit</span><span class="ctag">EDA</span></div>
+          <div class="cfoot"><span class="cbadge b-ml">Machine Learning</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="an" onclick="openModal('ekonomi')">
+          <div class="card-top"><div class="cicon" style="background:rgba(127,119,221,.12)">🇮🇩</div><span class="crepo">dashboard-ekonomi-indonesia</span></div>
+          <p class="ctitle">Dashboard Ekonomi Indonesia</p>
+          <p class="cdesc">38 provinces · 2016–2026 · BPS data · 9 analysis modules: choropleth map, K-Means clustering, forecasting, trade balance.</p>
+          <div><span class="cmetric">38 provinsi · 9 modul · Live</span></div>
+          <div class="ctags"><span class="ctag">Streamlit</span><span class="ctag">Plotly</span><span class="ctag">K-Means</span><span class="ctag">GeoJSON</span></div>
+          <div class="cfoot"><span class="cbadge b-an">Analytics</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="rc" onclick="openModal('rekom')">
+          <div class="card-top"><div class="cicon" style="background:rgba(212,83,126,.12)">⭐</div><span class="crepo">rekomendasi-sistem</span></div>
+          <p class="ctitle">Sistem Rekomendasi</p>
+          <p class="cdesc">Recommendation system using collaborative filtering and content-based filtering for personalized item suggestions.</p>
+          <div class="ctags"><span class="ctag">Collaborative</span><span class="ctag">Content-Based</span><span class="ctag">Recommender</span></div>
+          <div class="cfoot"><span class="cbadge b-rc">Rekomendasi</span><span class="clink">View details →</span></div>
+        </div>
+
+        <div class="pcard" data-cat="rc" onclick="openModal('book')">
+          <div class="card-top"><div class="cicon" style="background:rgba(212,83,126,.12)">📖</div><span class="crepo">book-recommendation-system</span></div>
+          <p class="ctitle">Book Recommendation System</p>
+          <p class="cdesc">Book suggestion engine based on reader preferences using collaborative and content-based filtering techniques.</p>
+          <div class="ctags"><span class="ctag">Books</span><span class="ctag">Recommender</span><span class="ctag">Filtering</span></div>
+          <div class="cfoot"><span class="cbadge b-rc">Rekomendasi</span><span class="clink">View details →</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="tab-panel" id="panel-dashboard">
+      <p class="slabel">Profile Overview</p>
+      <div class="dgrid">
+        <div class="dmet"><div class="dmet-l">Total Projects</div><div class="dmet-v">15</div><div class="dmet-s">Across 5 domains</div></div>
+        <div class="dmet"><div class="dmet-l">Best Accuracy</div><div class="dmet-v">100%</div><div class="dmet-s">Swin — ASL &amp; TrashNet</div></div>
+        <div class="dmet"><div class="dmet-l">Data Scale</div><div class="dmet-v">20M+</div><div class="dmet-s">Rows (BRI Asuransi)</div></div>
+        <div class="dmet"><div class="dmet-l">GPA</div><div class="dmet-v">3.75</div><div class="dmet-s">Mathematics, Unila</div></div>
+        <div class="dmet"><div class="dmet-l">Commission Achieved</div><div class="dmet-v">35%</div><div class="dmet-s">Reinsurance negotiation</div></div>
+        <div class="dmet"><div class="dmet-l">Certs Automated</div><div class="dmet-v">5K+</div><div class="dmet-s">Reinsurance slips</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;">
+        <div class="dcrd">
+          <h3>Projects by Category</h3>
+          <div class="cbars">
+            <div class="cbar-col"><div class="cbar-f" style="background:rgba(239,159,39,.7);height:0%" data-h="100"></div><div class="cbar-lbl">CV<br><span style="color:var(--accent)">5</span></div></div>
+            <div class="cbar-col"><div class="cbar-f" style="background:rgba(29,189,136,.7);height:0%" data-h="80"></div><div class="cbar-lbl">ML<br><span style="color:var(--accent)">5</span></div></div>
+            <div class="cbar-col"><div class="cbar-f" style="background:rgba(55,138,221,.7);height:0%" data-h="40"></div><div class="cbar-lbl">NLP<br><span style="color:var(--accent)">2</span></div></div>
+            <div class="cbar-col"><div class="cbar-f" style="background:rgba(127,119,221,.7);height:0%" data-h="20"></div><div class="cbar-lbl">Analytics<br><span style="color:var(--accent)">1</span></div></div>
+            <div class="cbar-col"><div class="cbar-f" style="background:rgba(212,83,126,.7);height:0%" data-h="40"></div><div class="cbar-lbl">Rec<br><span style="color:var(--accent)">2</span></div></div>
+          </div>
+        </div>
+        <div class="dcrd">
+          <h3>Key Model Results</h3>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:12px;color:var(--text2)">License Plate mAP50</span><span style="font-family:var(--mono);font-size:11px;color:var(--accent)">99.5%</span></div><div class="sbar-t"><div class="sbar-f" style="width:99.5%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:12px;color:var(--text2)">TrashNet Swin Accuracy</span><span style="font-family:var(--mono);font-size:11px;color:var(--accent)">98.82%</span></div><div class="sbar-t"><div class="sbar-f" style="width:98.82%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:12px;color:var(--text2)">ASL Swin Accuracy</span><span style="font-family:var(--mono);font-size:11px;color:var(--accent)">100%</span></div><div class="sbar-t"><div class="sbar-f" style="width:100%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:12px;color:var(--text2)">Breast Cancer mAP50</span><span style="font-family:var(--mono);font-size:11px;color:var(--accent)">87.5%</span></div><div class="sbar-t"><div class="sbar-f" style="width:87.5%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:12px;color:var(--text2)">MLOps AUC</span><span style="font-family:var(--mono);font-size:11px;color:var(--accent)">86.3%</span></div><div class="sbar-t"><div class="sbar-f" style="width:86.3%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dcrd" style="margin-top:11px;">
+        <h3>Technical Proficiency</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px;">
+          <div>
+            <div class="sbar-row"><span class="sbar-l">Python</span><div class="sbar-t"><div class="sbar-f" style="width:95%"></div></div><span class="sbar-p">95%</span></div>
+            <div class="sbar-row"><span class="sbar-l">SQL</span><div class="sbar-t"><div class="sbar-f" style="width:90%"></div></div><span class="sbar-p">90%</span></div>
+            <div class="sbar-row"><span class="sbar-l">Machine Learning</span><div class="sbar-t"><div class="sbar-f" style="width:88%"></div></div><span class="sbar-p">88%</span></div>
+            <div class="sbar-row"><span class="sbar-l">Computer Vision</span><div class="sbar-t"><div class="sbar-f" style="width:85%"></div></div><span class="sbar-p">85%</span></div>
+          </div>
+          <div>
+            <div class="sbar-row"><span class="sbar-l">NLP / LLM</span><div class="sbar-t"><div class="sbar-f" style="width:80%"></div></div><span class="sbar-p">80%</span></div>
+            <div class="sbar-row"><span class="sbar-l">Power BI / Tableau</span><div class="sbar-t"><div class="sbar-f" style="width:78%"></div></div><span class="sbar-p">78%</span></div>
+            <div class="sbar-row"><span class="sbar-l">R</span><div class="sbar-t"><div class="sbar-f" style="width:70%"></div></div><span class="sbar-p">70%</span></div>
+            <div class="sbar-row"><span class="sbar-l">Docker / GCP</span><div class="sbar-t"><div class="sbar-f" style="width:65%"></div></div><span class="sbar-p">65%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dcrd" style="margin-top:11px;">
+        <h3>Live Projects</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <a href="https://jokowi-sentiment.streamlit.app/" target="_blank" class="modal-link-btn primary" style="text-decoration:none">🔗 Jokowi Sentiment App</a>
+          <a href="https://dashboard-ekonomi-indonesia.streamlit.app/" target="_blank" class="modal-link-btn primary" style="text-decoration:none">🔗 Dashboard Ekonomi Indonesia</a>
+          <a href="https://proyek-akhir-belajar-penerapan-data-science-dwy4ygvksyoszytbfp.streamlit.app/" target="_blank" class="modal-link-btn primary" style="text-decoration:none">🔗 Jaya Jaya Institut App</a>
+          <a href="https://tugas-akhir-mlops-production.up.railway.app/v1/models/cc-model/metadata" target="_blank" class="modal-link-btn secondary" style="text-decoration:none">⚙️ MLOps Model API</a>
+          <a href="https://lookerstudio.google.com/reporting/c476c471-6ebb-477a-97f4-a5e143a25414" target="_blank" class="modal-link-btn secondary" style="text-decoration:none">📊 Looker Studio Dashboard</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="tab-panel" id="panel-skills">
+      <p class="slabel">Technical Skills</p>
+      <div class="skgrid">
+        <div class="skgrp"><div class="skgrp-t">Programming</div><div class="sklst"><span class="sktag">Python</span><span class="sktag">SQL</span><span class="sktag">R</span><span class="sktag">PySpark</span></div></div>
+        <div class="skgrp"><div class="skgrp-t">Machine Learning &amp; AI</div><div class="sklst"><span class="sktag">Supervised Learning</span><span class="sktag">Unsupervised</span><span class="sktag">YOLOv8</span><span class="sktag">YOLO11x-seg</span><span class="sktag">ViT</span><span class="sktag">Swin Transformer</span><span class="sktag">TrOCR</span><span class="sktag">LSTM</span><span class="sktag">Image Segmentation</span><span class="sktag">LLM</span><span class="sktag">Sentiment Analysis</span></div></div>
+        <div class="skgrp"><div class="skgrp-t">Data &amp; Visualization</div><div class="sklst"><span class="sktag">EDA</span><span class="sktag">Feature Engineering</span><span class="sktag">Power BI</span><span class="sktag">Tableau</span><span class="sktag">Streamlit</span><span class="sktag">Plotly</span><span class="sktag">Metabase</span><span class="sktag">Looker Studio</span><span class="sktag">Excel</span></div></div>
+        <div class="skgrp"><div class="skgrp-t">Cloud &amp; DevOps</div><div class="sklst"><span class="sktag">GCP</span><span class="sktag">AWS</span><span class="sktag">Docker</span><span class="sktag">CI/CD</span><span class="sktag">Git</span><span class="sktag">GitHub Actions</span><span class="sktag">Railway</span></div></div>
+        <div class="skgrp"><div class="skgrp-t">MLOps</div><div class="sklst"><span class="sktag">TFX Pipeline</span><span class="sktag">Prometheus</span><span class="sktag">Grafana</span><span class="sktag">MLflow</span><span class="sktag">WandB</span><span class="sktag">HuggingFace Hub</span><span class="sktag">Kaggle API</span></div></div>
+        <div class="skgrp"><div class="skgrp-t">Domain Knowledge</div><div class="sklst"><span class="sktag">Insurance Analytics</span><span class="sktag">Reinsurance</span><span class="sktag">Financial Data</span><span class="sktag">Loss Ratio</span><span class="sktag">Portfolio Analysis</span><span class="sktag">Securities Analysis</span></div></div>
+      </div>
+      <p class="slabel">Frameworks &amp; Libraries</p>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <span class="spill">TensorFlow</span><span class="spill">PyTorch</span><span class="spill">Scikit-learn</span><span class="spill">OpenCV</span><span class="spill">Pandas</span><span class="spill">NumPy</span><span class="spill">Matplotlib</span><span class="spill">Seaborn</span><span class="spill">Ultralytics</span><span class="spill">Hugging Face Transformers</span><span class="spill">FastAPI</span><span class="spill">Selenium</span><span class="spill">Chart.js</span><span class="spill">Gemini API</span><span class="spill">Gemma 2 9B</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="foot-n">© 2025 Ziyad Muhammad Adzin Azzufari</p>
+    <div class="foot-links">
+      <a class="foot-link" href="mailto:ziyad.azzufari@gmail.com">Email</a>
+      <a class="foot-link" href="https://linkedin.com/in/ziyad-muhammad-adzin-azzufari/" target="_blank">LinkedIn</a>
+      <a class="foot-link" href="https://github.com/zzazzz" target="_blank">GitHub</a>
+      <a class="foot-link" href="https://jokowi-sentiment.streamlit.app/" target="_blank">Jokowi Sentiment</a>
+      <a class="foot-link" href="https://dashboard-ekonomi-indonesia.streamlit.app/" target="_blank">Dashboard Ekonomi</a>
+    </div>
+  </footer>
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <div class="modal-head" id="modal-head"></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// PROJECT DATA
+const PROJECTS = {
+  plate:{
+    title:"License Plate Recognition & Violation Detection",
+    repo:"zzazzz/pelanggaran-kendaraan-motor",
+    badge:"Computer Vision",badgeClass:"b-cv",
+    desc:"End-to-end pipeline for automated vehicle violation detection from image data. This was my thesis project at the University of Lampung, combining state-of-the-art object detection and OCR models into a production-ready system.",
+    highlight:"Thesis project — combining YOLOv8 detection + TrOCR character recognition into a complete violation pipeline.",
+    metrics:[
+      {l:"mAP50 (Detection)",v:"99.5%"},{l:"mAP50-95",v:"83.78%"},{l:"Recall",v:"100%"},{l:"CER (Validation)",v:"1.1%"},{l:"CER (Test)",v:"1.12%"}
+    ],
+    bullets:["Implemented YOLOv8 for license plate detection achieving 99.5% mAP50 and 100% Recall","Implemented TrOCR for character recognition achieving CER of 1.1% on validation set","Built complete automated pipeline: detect → crop → recognize → flag violation","Used as Bangkit Academy capstone project (Google, GoTo, Traveloka)"],
+    tags:["YOLOv8","TrOCR","Object Detection","OCR","Python","OpenCV","Ultralytics"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/pelanggaran-kendaraan-motor",type:"primary"}]
+  },
+  asl:{
+    title:"American Sign Language Recognition",
+    repo:"zzazzz/America-sign-language",
+    badge:"Computer Vision",badgeClass:"b-cv",
+    desc:"Comparative study between Vision Transformer (ViT) and Swin Transformer for classifying 29 categories of American Sign Language hand gestures. Built a real-time gesture recognition GUI using Python.",
+    highlight:"Swin Transformer achieved perfect 100% accuracy, F1, Precision, and Recall across all 29 ASL categories.",
+    metrics:[
+      {l:"ViT Accuracy",v:"99.89%"},{l:"ViT F1",v:"0.9988"},{l:"Swin Accuracy",v:"100%"},{l:"Swin F1",v:"1.0000"},{l:"Categories",v:"29"}
+    ],
+    bullets:["Compared ViT vs Swin Transformer architectures on 29-category ASL classification","Swin Transformer: Accuracy 100%, F1: 1.0000, Precision: 100%, Recall: 100%","ViT: Accuracy 99.89%, F1: 0.9988, Precision: 99.89%, Recall: 99.89%","Developed real-time gesture recognition GUI using Python for live accessibility use"],
+    tags:["Vision Transformer","Swin Transformer","PyTorch","Real-time GUI","HuggingFace","Accessibility"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/America-sign-language",type:"primary"}]
+  },
+  trashnet:{
+    title:"TrashNet — Waste Classification with CI/CD",
+    repo:"zzazzz/trashnet",
+    badge:"Computer Vision",badgeClass:"b-cv",
+    desc:"Automatic waste classification system using deep learning on 6 categories (cardboard, glass, metal, paper, plastic, trash). Features a full CI/CD pipeline: GitHub Actions triggers Kaggle GPU training, downloads results, and auto-generates README.",
+    highlight:"Swin Transformer outperforms ResNet50 by 1.57% accuracy. Models published on HuggingFace Hub with W&B experiment tracking.",
+    metrics:[
+      {l:"Swin Accuracy",v:"98.82%"},{l:"Swin F1",v:"98.82%"},{l:"ResNet50 Acc",v:"97.25%"},{l:"Best Epoch (Swin)",v:"6"},{l:"Classes",v:"6"}
+    ],
+    bullets:["Compared ResNet50 vs Swin Transformer on TrashNet dataset (~5,054 images, 6 classes)","Swin Transformer: Accuracy 98.82%, F1 98.82%, Precision 98.85%, Recall 98.82%","CI/CD: push to main → upload dataset to Kaggle → trigger GPU notebook → download results → auto-generate README","Models uploaded to HuggingFace Hub (ziyadazz/trashnet-resnet50 & ziyadazz/trashnet-swin)","Experiment tracking with Weights & Biases (W&B)"],
+    tags:["Swin Transformer","ResNet50","GitHub Actions","Kaggle GPU P100","HuggingFace","WandB","CI/CD"],
+    links:[
+      {label:"GitHub →",url:"https://github.com/zzazzz/trashnet",type:"primary"},
+      {label:"HuggingFace Model →",url:"https://huggingface.co/ziyadazz",type:"secondary"},
+      {label:"W&B Tracking →",url:"https://wandb.ai/ziyad-azzufari/trashnet-classification",type:"secondary"}
+    ]
+  },
+  tflite:{
+    title:"ASL Recognition — TFLite Mobile",
+    repo:"zzazzz/CNN-asl-tflite",
+    badge:"Computer Vision",badgeClass:"b-cv",
+    desc:"CNN model for American Sign Language recognition, optimized with TensorFlow Lite for deployment on mobile and edge devices. Lightweight and efficient for real-time inference without cloud dependency.",
+    highlight:"Converted CNN to TFLite format for on-device inference — no internet required for gesture recognition.",
+    metrics:[],
+    bullets:["Built CNN classifier for ASL hand gesture recognition","Converted to TensorFlow Lite (.tflite) for mobile/edge deployment","Optimized model size and latency for real-time on-device inference","Enables accessibility features for deaf/hard-of-hearing users without cloud dependency"],
+    tags:["TensorFlow Lite","CNN","Mobile ML","Edge AI","Android","Accessibility"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/CNN-asl-tflite",type:"primary"}]
+  },
+  cancer:{
+    title:"Image Segmentation for Medical Data",
+    repo:"zzazzz/breast-cancer",
+    badge:"Computer Vision",badgeClass:"b-cv",
+    desc:"Instance segmentation of breast cancer images using YOLO11x-seg (491 layers, 62M parameters) on 154 validation images. Two-class classification: Benign vs Malignant with both box and mask predictions.",
+    highlight:"Benign class achieves 94.8% mAP50 box and 95.3% mAP50 mask. Complex architecture: 491 layers, 62M parameters.",
+    metrics:[
+      {l:"Overall mAP50 (Box)",v:"87.5%"},{l:"Overall mAP50 (Mask)",v:"87.6%"},{l:"Benign mAP50",v:"94.8%"},{l:"Malignant mAP50",v:"80.3%"},{l:"Parameters",v:"62M"}
+    ],
+    bullets:["Used YOLO11x-seg with 491 layers and 62M parameters for instance segmentation","Benign class: Box P: 85.5%, R: 87.9%, mAP50: 94.8%, mAP50-95: 78.7%","Malignant class: Box P: 68.2%, R: 84.6%, mAP50: 80.3%, mAP50-95: 57.7%","Evaluated both bounding box and mask predictions for clinical relevance"],
+    tags:["YOLO11x-seg","Instance Segmentation","Medical AI","PyTorch","Breast Cancer","Healthcare"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/breast-cancer",type:"primary"}]
+  },
+  jokowi:{
+    title:"Google News Sentiment Analysis on \"Jokowi\" (2019–2024)",
+    repo:"zzazzz/jokowi-sentiment",
+    badge:"NLP",badgeClass:"b-nlp",
+    desc:"Longitudinal sentiment analysis of public opinion on President Jokowi across 5 years (2019–2024). Scraped 68,000+ headlines from Google News via Selenium, then labeled using Gemma 2 9B Instruct. Live dashboard deployed on Streamlit.",
+    highlight:"68,000+ headlines across 5 years. Sentiment: Neutral ~47.3% | Negative ~34.7% | Positive ~18%. Live app at jokowi-sentiment.streamlit.app",
+    metrics:[
+      {l:"Total Headlines",v:"68,000+"},{l:"Years Covered",v:"5 (2019–24)"},{l:"Neutral Sentiment",v:"~47.3%"},{l:"Negative Sentiment",v:"~34.7%"},{l:"Positive Sentiment",v:"~18%"}
+    ],
+    bullets:["Scraped 68,000+ news headlines from Google News using Selenium automation","Used Gemma 2 9B Instruct (LLM) for accurate sentiment labeling at scale","Sentiment distribution: Neutral 47.3%, Negative 34.7%, Positive 18%","Built and deployed interactive Streamlit dashboard with yearly trend analysis","Tracked public opinion shifts across major political events 2019–2024"],
+    tags:["Gemma 2 9B","LLM","Selenium","Web Scraping","Streamlit","NLP","Sentiment Analysis","Python"],
+    links:[
+      {label:"Live App →",url:"https://jokowi-sentiment.streamlit.app/",type:"primary"},
+      {label:"GitHub →",url:"https://github.com/zzazzz/jokowi-sentiment",type:"secondary"}
+    ]
+  },
+  nasdaq:{
+    title:"NASDAQ Prediction + Fed Rate Sentiment",
+    repo:"zzazzz/NASDAQ-PREDICTION",
+    badge:"NLP",badgeClass:"b-nlp",
+    desc:"Forecasting NASDAQ index movement by integrating macroeconomic variables (DXY Price, Fed Funds Rate) with news sentiment. 21,476+ headlines analyzed using Gemma 2 9B Instruct, then fed into an LSTM time-series model.",
+    highlight:"Combines macro data (DXY, Fed Rate) + sentiment from 21,476 headlines into a unified LSTM forecasting model.",
+    metrics:[
+      {l:"Headlines Analyzed",v:"21,476+"},{l:"Model",v:"LSTM"},{l:"Sentiment Labels",v:"3"},{l:"Neutral News",v:"~38%"},{l:"Negative News",v:"~33%"}
+    ],
+    bullets:["Analyzed 21,476+ financial news headlines with Gemma 2 9B Instruct for sentiment labeling","Sentiment distribution: Neutral ~38%, Negative ~33%, Positive ~29%","Integrated DXY Price (Dollar Index), Fed Funds Rate, sentiment scores, and volume into LSTM model","Performed data cleaning, normalization, and feature engineering for time-series input","Evaluated using MSE, MAE, and RMSE metrics"],
+    tags:["LSTM","Gemma 2 9B","Time Series","Finance","NLP","Sentiment","DXY","Fed Rate"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/NASDAQ-PREDICTION",type:"primary"}]
+  },
+  cvscreen:{
+    title:"AI CV Screener with Gemini",
+    repo:"zzazzz/cv-screening-with-gemini",
+    badge:"Machine Learning",badgeClass:"b-ml",
+    desc:"Automated recruitment system that uses Google Gemini AI to screen CVs, score candidates based on job requirements, and provide deep-dive analysis and insights. Built with FastAPI backend and a rich HTML/CSS/JS frontend with Chart.js visualizations.",
+    highlight:"Full recruitment pipeline: upload CVs → define job → AI scores & ranks → insights dashboard with Chart.js visualizations.",
+    metrics:[],
+    bullets:["Automated CV screening using Google Gemini API for document understanding","Weighted scoring system for objective candidate ranking","Deep-dive analysis panel with per-candidate strengths/weaknesses breakdown","Insights dashboard with Chart.js visualizations (score distribution, skill heatmap)","FastAPI backend for fast async processing of multiple CVs"],
+    tags:["Gemini API","FastAPI","Google AI","HTML/CSS/JS","Chart.js","LLM","HR-Tech","Recruitment"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/cv-screening-with-gemini",type:"primary"}]
+  },
+  mlops:{
+    title:"MLOps — Heart Disease Prediction Pipeline",
+    repo:"zzazzz/tugas-akhir-mlops",
+    badge:"Machine Learning",badgeClass:"b-ml",
+    desc:"Production-ready MLOps pipeline for heart disease prediction. Covers the entire lifecycle: TFX data pipeline, model training with 4-layer neural network, Railway deployment, and real-time monitoring with Prometheus + Grafana.",
+    highlight:"Deployed on Railway with live monitoring via Prometheus. Every prediction request tracked with session health monitoring.",
+    metrics:[
+      {l:"Binary Accuracy",v:"84.3%"},{l:"AUC",v:"86.3%"},{l:"True Positives",v:"20"},{l:"True Negatives",v:"23"},{l:"False Positives",v:"2"}
+    ],
+    bullets:["TFX pipeline: data ingestion, validation, transformation, training, evaluation","Neural network: 4 hidden layers (8→16→16→32 units, ReLU) + sigmoid output","Model evaluation with TFMA: AUC, BinaryAccuracy, FP, TP, FN, TN","Deployed on Railway with serving_default and transform_features signatures","Monitoring with Prometheus + Grafana: request_count and session tracking"],
+    tags:["TFX","TensorFlow","Railway","Prometheus","Grafana","MLOps","CI/CD","Docker"],
+    links:[
+      {label:"Live API →",url:"https://tugas-akhir-mlops-production.up.railway.app/v1/models/cc-model/metadata",type:"primary"},
+      {label:"GitHub →",url:"https://github.com/zzazzz/tugas-akhir-mlops",type:"secondary"}
+    ]
+  },
+  credit:{
+    title:"Credit Scoring App",
+    repo:"zzazzz/credit-scoring-app",
+    badge:"Machine Learning",badgeClass:"b-ml",
+    desc:"Web-based credit scoring application designed for non-technical users. Builds an ML classification model to predict credit worthiness and exposes it through a user-friendly web interface.",
+    highlight:"Bridges ML model and business users — non-technical staff can get instant credit scoring through a simple web UI.",
+    metrics:[],
+    bullets:["ML classification model for predicting credit worthiness","User-friendly web interface accessible to non-technical users","Full pipeline from raw data to deployed web application","Applicable to fintech and banking credit decision workflows"],
+    tags:["Classification","Scikit-learn","Fintech","Web App","Python","Credit Risk","Banking"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/credit-scoring-app",type:"primary"}]
+  },
+  belajar:{
+    title:"Employee Attrition Analysis — Jaya Jaya Maju",
+    repo:"zzazzz/Belajar-Penerapan-Data-Science",
+    badge:"Machine Learning",badgeClass:"b-ml",
+    desc:"HR analytics project for Jaya Jaya Maju company (1,058 employees). Analyzed 16.93% attrition rate across 18 business questions using AdaBoost classification model and Looker Studio business dashboard.",
+    highlight:"Discovered key attrition drivers: overtime work, low environment satisfaction (27% attrition rate), low job satisfaction (22% attrition rate), and young employees (28–29 years).",
+    metrics:[
+      {l:"Attrition Rate",v:"16.93%"},{l:"Employees",v:"1,058"},{l:"Employees Left",v:"179"},{l:"Dashboard KPIs",v:"18"},{l:"Model",v:"AdaBoost"}
+    ],
+    bullets:["Attrition rate: 16.93% — 179 of 1,058 employees left the company","Key finding: overtime workers have significantly higher attrition risk","Environment satisfaction level 1 has 27% attrition rate; job satisfaction level 1 has 22%","Highest attrition: RnD department and Laboratory Technician role","18 KPI dashboard in Looker Studio with demographic and work factor analysis"],
+    tags:["AdaBoost","Looker Studio","Streamlit","HR Analytics","Python","EDA","Classification"],
+    links:[
+      {label:"Looker Studio →",url:"https://lookerstudio.google.com/reporting/c476c471-6ebb-477a-97f4-a5e143a25414",type:"primary"},
+      {label:"GitHub →",url:"https://github.com/zzazzz/Belajar-Penerapan-Data-Science",type:"secondary"}
+    ]
+  },
+  proyek:{
+    title:"Student Dropout Prediction — Jaya Jaya Institut",
+    repo:"zzazzz/Proyek-akhir-belajar-penerapan-data-science",
+    badge:"Machine Learning",badgeClass:"b-ml",
+    desc:"Predictive system for identifying students at risk of dropout at Jaya Jaya Institut. Analyzes demographic, academic, and socioeconomic factors. Deployed as live Streamlit application for real-time prediction.",
+    highlight:"Live Streamlit app deployed for real-time use by institution staff to identify at-risk students before they dropout.",
+    metrics:[],
+    bullets:["Features: demographics (age, marital status, nationality), academic (units enrolled, grade), socioeconomic (parent occupation, tuition status, GDP, inflation)","ML model to predict dropout probability for individual students","Interactive business dashboard to monitor risk factors across the student population","Streamlit app with 'Predict' button for real-time student assessment"],
+    tags:["Classification","Streamlit","EDA","Feature Engineering","Student Analytics","Education","Python"],
+    links:[
+      {label:"Live App →",url:"https://proyek-akhir-belajar-penerapan-data-science-dwy4ygvksyoszytbfp.streamlit.app/",type:"primary"},
+      {label:"GitHub →",url:"https://github.com/zzazzz/Proyek-akhir-belajar-penerapan-data-science",type:"secondary"}
+    ]
+  },
+  ekonomi:{
+    title:"Dashboard Ekonomi Indonesia",
+    repo:"zzazzz/dashboard-ekonomi-indonesia",
+    badge:"Analytics",badgeClass:"b-an",
+    desc:"Comprehensive macroeconomic analysis dashboard for all 38 Indonesian provinces covering 2016–2026. Integrates data from BPS (Badan Pusat Statistik) across 7 datasets. Features 9 analysis modules including interactive choropleth map, K-Means clustering, AI forecasting, and trade balance analysis.",
+    highlight:"9 full analysis modules, 38 provinces, 10-year span, K-Means clustering with PCA, and GDP forecast to 2030 (Rp 101,402 Ribu). Live at dashboard-ekonomi-indonesia.streamlit.app",
+    metrics:[
+      {l:"Provinces",v:"38"},{l:"Years Covered",v:"2016–2026"},{l:"Analysis Modules",v:"9"},{l:"K-Means k optimal",v:"6"},{l:"Silhouette Score",v:"0.293"}
+    ],
+    bullets:["9 modules: Ringkasan, Peta Choropleth, Tren, Perbandingan, Neraca Perdagangan, Penduduk, Forecast, AI Analytics, Lainnya","Choropleth map with GeoJSON for 34 + 4 new Papua provinces (DOB)","K-Means clustering with PCA 2D — auto-selects optimal k via silhouette score","Linear Regression forecast with 95% CI for 38 provinces × 17 indicators","AI sub-module: polynomial GDP forecast to 2030 + Z-score heatmap cluster profiling","Correlation matrix, CSV export, and Story Mode auto-narrative"],
+    tags:["Streamlit","Plotly","K-Means","PCA","Linear Regression","GeoJSON","Pandas","BPS Indonesia"],
+    links:[
+      {label:"Live Dashboard →",url:"https://dashboard-ekonomi-indonesia.streamlit.app/",type:"primary"},
+      {label:"GitHub →",url:"https://github.com/zzazzz/dashboard-ekonomi-indonesia",type:"secondary"}
+    ]
+  },
+  rekom:{
+    title:"Sistem Rekomendasi",
+    repo:"zzazzz/rekomendasi-sistem",
+    badge:"Rekomendasi",badgeClass:"b-rc",
+    desc:"Implementation of a recommendation system using two complementary approaches: collaborative filtering (based on user behavior and ratings) and content-based filtering (based on item attributes).",
+    highlight:"Combines collaborative and content-based filtering for more robust and accurate personalized recommendations.",
+    metrics:[],
+    bullets:["Collaborative filtering: uses user-item interaction matrix and similarity measures","Content-based filtering: analyzes item features to match user preferences","Hybrid approach for improved recommendation accuracy","Evaluated with standard recommender system metrics"],
+    tags:["Collaborative Filtering","Content-Based","Scikit-learn","NumPy","Pandas","Recommender Systems"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/rekomendasi-sistem",type:"primary"}]
+  },
+  book:{
+    title:"Book Recommendation System",
+    repo:"zzazzz/book-recommendation-system",
+    badge:"Rekomendasi",badgeClass:"b-rc",
+    desc:"Domain-specific recommendation system for books, suggesting titles based on reader preferences using both collaborative and content-based filtering. Helps readers discover books aligned with their reading history and tastes.",
+    highlight:"Domain-focused on books — applies recommender system techniques to a rich bibliographic dataset.",
+    metrics:[],
+    bullets:["Content-based: recommends books similar in genre, author, and themes to previously read titles","Collaborative: finds users with similar reading patterns and recommends their favorites","Handles cold-start problem for new users with content-based fallback","Evaluated using precision@k and recall@k"],
+    tags:["Collaborative Filtering","Content-Based","Books","Python","Pandas","Recommender Systems"],
+    links:[{label:"GitHub →",url:"https://github.com/zzazzz/book-recommendation-system",type:"primary"}]
+  }
+};
+
+function openModal(id){
+  const p = PROJECTS[id];
+  if(!p) return;
+  const head = document.getElementById('modal-head');
+  const body = document.getElementById('modal-body');
+
+  head.innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-badge-row">
+      <span class="cbadge ${p.badgeClass}">${p.badge}</span>
+    </div>
+    <h2 class="modal-title">${p.title}</h2>
+    <p class="modal-repo">github.com/${p.repo}</p>
+  `;
+
+  let metricsHtml = '';
+  if(p.metrics.length){
+    metricsHtml = `<div class="modal-section">
+      <p class="modal-section-title">Key Metrics</p>
+      <div class="modal-metrics">
+        ${p.metrics.map(m=>`<div class="modal-metric-card"><div class="modal-metric-label">${m.l}</div><div class="modal-metric-val">${m.v}</div></div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  let bulletsHtml = '';
+  if(p.bullets.length){
+    bulletsHtml = `<div class="modal-section">
+      <p class="modal-section-title">Details</p>
+      <ul class="modal-ul">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  body.innerHTML = `
+    <div class="modal-section">
+      <p class="modal-section-title">Overview</p>
+      <p class="modal-desc">${p.desc}</p>
+    </div>
+    ${p.highlight ? `<div class="modal-highlight"><strong>→ </strong>${p.highlight}</div><br>` : ''}
+    ${metricsHtml}
+    ${bulletsHtml}
+    <div class="modal-section">
+      <p class="modal-section-title">Tech Stack</p>
+      <div class="modal-tags">${p.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="modal-section">
+      <p class="modal-section-title">Links</p>
+      <div class="modal-links">${p.links.map(l=>`<a href="${l.url}" target="_blank" class="modal-link-btn ${l.type}">${l.label}</a>`).join('')}</div>
+    </div>
+  `;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e){
+  if(e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+function switchTab(id){
+  const ids=['about','experience','projects','dashboard','skills'];
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach((a,i)=>a.classList.toggle('active',ids[i]===id));
+  if(id==='dashboard') animateDash();
+}
+
+function filterProj(cat,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.toggle('hidden',cat!=='all'&&c.dataset.cat!==cat));
+}
+
+function animateDash(){
+  setTimeout(()=>{
+    document.querySelectorAll('.sbar-f').forEach(el=>el.style.transform='scaleX(1)');
+    document.querySelectorAll('.cbar-f').forEach(el=>{el.style.height=el.dataset.h+'%'});
+  },100);
+}
+</script>
+</body>
+</html>
