@@ -344,7 +344,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-al
     <!-- PROJECTS -->
     <div class="tab-panel" id="panel-projects">
       <div class="filter-bar">
-        <button class="fbtn active" onclick="filterProj('all',this)">All (15)</button>
+        <button class="fbtn active" onclick="filterProj('all',this)">All (16)</button>
         <button class="fbtn" onclick="filterProj('cv',this)">Computer Vision</button>
         <button class="fbtn" onclick="filterProj('nlp',this)">NLP</button>
         <button class="fbtn" onclick="filterProj('ml',this)">Machine Learning</button>
@@ -466,6 +466,15 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-al
           <div class="cfoot"><span class="cbadge b-an">Analytics</span><span class="clink">View details →</span></div>
         </div>
 
+        <div class="pcard" data-cat="an" onclick="openModal('idxownership')">
+          <div class="card-top"><div class="cicon" style="background:rgba(127,119,221,.12)">📈</div><span class="crepo">idx-ownership-dashboard</span></div>
+          <p class="ctitle">IDX Ownership Dashboard — Kepemilikan Saham ≥ 1%</p>
+          <p class="cdesc">Dashboard Flask untuk menganalisis pemegang saham di atas 1%, perubahan investor, emiten, dan indikasi corporate action.</p>
+          <div><span class="cmetric">Live on Hugging Face Spaces</span></div>
+          <div class="ctags"><span class="ctag">Flask</span><span class="ctag">Pandas</span><span class="ctag">Plotly</span><span class="ctag">KSEI/IDX</span></div>
+          <div class="cfoot"><span class="cbadge b-an">Analytics</span><span class="clink">View details →</span></div>
+        </div>
+
         <div class="pcard" data-cat="rc" onclick="openModal('rekom')">
           <div class="card-top"><div class="cicon" style="background:rgba(212,83,126,.12)">⭐</div><span class="crepo">rekomendasi-sistem</span></div>
           <p class="ctitle">Sistem Rekomendasi</p>
@@ -489,7 +498,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-al
     <div class="tab-panel" id="panel-dashboard">
       <p class="slabel">Profile Overview</p>
       <div class="dgrid">
-        <div class="dmet"><div class="dmet-l">Total Projects</div><div class="dmet-v">15</div><div class="dmet-s">Across 5 domains</div></div>
+        <div class="dmet"><div class="dmet-l">Total Projects</div><div class="dmet-v">16</div><div class="dmet-s">Across 5 domains</div></div>
         <div class="dmet"><div class="dmet-l">Best Accuracy</div><div class="dmet-v">100%</div><div class="dmet-s">Swin — ASL &amp; TrashNet</div></div>
         <div class="dmet"><div class="dmet-l">Data Scale</div><div class="dmet-v">20M+</div><div class="dmet-s">Rows (BRI Asuransi)</div></div>
         <div class="dmet"><div class="dmet-l">GPA</div><div class="dmet-v">3.75</div><div class="dmet-s">Mathematics, Unila</div></div>
@@ -503,7 +512,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-al
             <div class="cbar-col"><div class="cbar-f" style="background:rgba(239,159,39,.7);height:0%" data-h="100"></div><div class="cbar-lbl">CV<br><span style="color:var(--accent)">5</span></div></div>
             <div class="cbar-col"><div class="cbar-f" style="background:rgba(29,189,136,.7);height:0%" data-h="80"></div><div class="cbar-lbl">ML<br><span style="color:var(--accent)">5</span></div></div>
             <div class="cbar-col"><div class="cbar-f" style="background:rgba(55,138,221,.7);height:0%" data-h="40"></div><div class="cbar-lbl">NLP<br><span style="color:var(--accent)">2</span></div></div>
-            <div class="cbar-col"><div class="cbar-f" style="background:rgba(127,119,221,.7);height:0%" data-h="20"></div><div class="cbar-lbl">Analytics<br><span style="color:var(--accent)">1</span></div></div>
+            <div class="cbar-col"><div class="cbar-f" style="background:rgba(127,119,221,.7);height:0%" data-h="40"></div><div class="cbar-lbl">Analytics<br><span style="color:var(--accent)">2</span></div></div>
             <div class="cbar-col"><div class="cbar-f" style="background:rgba(212,83,126,.7);height:0%" data-h="40"></div><div class="cbar-lbl">Rec<br><span style="color:var(--accent)">2</span></div></div>
           </div>
         </div>
@@ -540,6 +549,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-al
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
           <a href="https://jokowi-sentiment.streamlit.app/" target="_blank" class="modal-link-btn primary" style="text-decoration:none">🔗 Jokowi Sentiment App</a>
           <a href="https://dashboard-ekonomi-indonesia.streamlit.app/" target="_blank" class="modal-link-btn primary" style="text-decoration:none">🔗 Dashboard Ekonomi Indonesia</a>
+          <a href="https://huggingface.co/spaces/ziyadazz/idx-ownership-dashboard" target="_blank" class="modal-link-btn primary" style="text-decoration:none">🔗 IDX Ownership Dashboard</a>
           <a href="https://proyek-akhir-belajar-penerapan-data-science-dwy4ygvksyoszytbfp.streamlit.app/" target="_blank" class="modal-link-btn primary" style="text-decoration:none">🔗 Jaya Jaya Institut App</a>
           <a href="https://tugas-akhir-mlops-production.up.railway.app/v1/models/cc-model/metadata" target="_blank" class="modal-link-btn secondary" style="text-decoration:none">⚙️ MLOps Model API</a>
           <a href="https://lookerstudio.google.com/reporting/c476c471-6ebb-477a-97f4-a5e143a25414" target="_blank" class="modal-link-btn secondary" style="text-decoration:none">📊 Looker Studio Dashboard</a>
@@ -573,6 +583,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-al
       <a class="foot-link" href="https://github.com/zzazzz" target="_blank">GitHub</a>
       <a class="foot-link" href="https://jokowi-sentiment.streamlit.app/" target="_blank">Jokowi Sentiment</a>
       <a class="foot-link" href="https://dashboard-ekonomi-indonesia.streamlit.app/" target="_blank">Dashboard Ekonomi</a>
+      <a class="foot-link" href="https://huggingface.co/spaces/ziyadazz/idx-ownership-dashboard" target="_blank">IDX Ownership Dashboard</a>
     </div>
   </footer>
 </div>
@@ -769,6 +780,21 @@ const PROJECTS = {
     links:[
       {label:"Live Dashboard →",url:"https://dashboard-ekonomi-indonesia.streamlit.app/",type:"primary"},
       {label:"GitHub →",url:"https://github.com/zzazzz/dashboard-ekonomi-indonesia",type:"secondary"}
+    ]
+  },
+  idxownership:{
+    title:"IDX Ownership Dashboard — Kepemilikan Saham ≥ 1%",
+    repo:"ziyadazz/idx-ownership-dashboard",
+    badge:"Analytics",badgeClass:"b-an",
+    desc:"Interactive dashboard for monitoring Indonesian listed-company ownership data above 1%. The app processes KSEI/IDX Excel disclosure files, aggregates investor entities, compares periods, and surfaces ownership concentration, free-float view, investor-level portfolios, stock-level summaries, and detailed change flows.",
+    highlight:"Live Flask dashboard on Hugging Face Spaces for IDX/KSEI ownership analysis, including investor buy/sell, emiten buy/sell, and corporate-action review such as stock split, reverse split, and share-adjustment/dilution signals.",
+    metrics:[
+      {l:"Threshold",v:"≥ 1% ownership"},{l:"Platform",v:"Hugging Face Spaces"},{l:"Backend",v:"Flask"},{l:"Data Engine",v:"Pandas"},{l:"Visuals",v:"Plotly + JS"}
+    ],
+    bullets:["Built a Flask-based dashboard for IDX ownership data above 1% using precomputed JSON payloads for faster loading","Processed multiple KSEI/IDX Excel periods and handled duplicate lampiran files by choosing the latest suffix where available","Aggregated holdings by canonical investor entity before calculating ownership changes","Created tabs for Ringkasan Saham, Per Investor, Metrik, Perubahan Data, and Data Lengkap","Added change-flow views for Investor Beli, Investor Jual, Emiten Beli, Emiten Jual, plus corporate-action review classes"],
+    tags:["Flask","Pandas","Plotly","JavaScript","KSEI","IDX","Hugging Face Spaces","Financial Analytics"],
+    links:[
+      {label:"Live Dashboard →",url:"https://huggingface.co/spaces/ziyadazz/idx-ownership-dashboard",type:"primary"}
     ]
   },
   rekom:{
