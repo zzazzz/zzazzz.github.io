@@ -495,10 +495,11 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:28px 0;text-al
         </div>
 
         <div class="pcard" data-cat="rc" onclick="openModal('book')">
-          <div class="card-top"><div class="cicon" style="background:rgba(212,83,126,.12)">📖</div><span class="crepo">book-recommendation-system</span></div>
-          <p class="ctitle">Book Recommendation System</p>
-          <p class="cdesc">Book suggestion engine based on reader preferences using collaborative and content-based filtering techniques.</p>
-          <div class="ctags"><span class="ctag">Books</span><span class="ctag">Recommender</span><span class="ctag">Filtering</span></div>
+          <div class="card-top"><div class="cicon" style="background:rgba(212,83,126,.12)">📚</div><span class="crepo">book-recommendation-system-dashboard</span></div>
+          <p class="ctitle">BookMind — Book Recommendation Dashboard</p>
+          <p class="cdesc">Dashboard Streamlit untuk eksplorasi Book-Crossing, evaluasi model rekomendasi, dan simulasi Top-10 secara real-time.</p>
+          <div><span class="cmetric">Live on Streamlit Cloud · Tuned Hybrid</span></div>
+          <div class="ctags"><span class="ctag">Streamlit</span><span class="ctag">Hybrid</span><span class="ctag">TF-IDF</span><span class="ctag">User-CF</span></div>
           <div class="cfoot"><span class="cbadge b-rc">Rekomendasi</span><span class="clink">View details →</span></div>
         </div>
 
@@ -839,15 +840,32 @@ const PROJECTS = {
     links:[{label:"GitHub →",url:"https://github.com/zzazzz/rekomendasi-sistem",type:"primary"}]
   },
   book:{
-    title:"Book Recommendation System",
+    title:"BookMind — Book Recommendation Dashboard",
     repo:"zzazzz/book-recommendation-system",
     badge:"Rekomendasi",badgeClass:"b-rc",
-    desc:"Domain-specific recommendation system for books, suggesting titles based on reader preferences using both collaborative and content-based filtering. Helps readers discover books aligned with their reading history and tastes.",
-    highlight:"Domain-focused on books — applies recommender system techniques to a rich bibliographic dataset.",
-    metrics:[],
-    bullets:["Content-based: recommends books similar in genre, author, and themes to previously read titles","Collaborative: finds users with similar reading patterns and recommends their favorites","Handles cold-start problem for new users with content-based fallback","Evaluated using precision@k and recall@k"],
-    tags:["Collaborative Filtering","Content-Based","Books","Python","Pandas","Recommender Systems"],
-    links:[{label:"GitHub →",url:"https://github.com/zzazzz/book-recommendation-system",type:"primary"}]
+    desc:"Interactive Streamlit dashboard for the Book-Crossing dataset. The app combines data exploration, model evaluation, and real-time Top-10 book recommendation simulation in one portfolio-ready interface.",
+    highlight:"Final model uses a Tuned Hybrid approach: 0.20 Content-Based TF-IDF, 0.20 Co-Like ItemKNN, 0.20 Author Affinity, and 0.40 User-Based CF. Popularity is kept at 0.00 after validation tuning.",
+    metrics:[
+      {l:"Platform",v:"Streamlit Cloud"},
+      {l:"Final Model",v:"Tuned Hybrid"},
+      {l:"Recall@10",v:"0.184"},
+      {l:"NDCG@10",v:"0.1082"},
+      {l:"Coverage",v:"38.9%"},
+      {l:"Evaluated Users",v:"250"}
+    ],
+    bullets:[
+      "Built an interactive dashboard with Overview, Data, Evaluation, Recommendation, and Methodology pages",
+      "Processed Book-Crossing data from Books.csv, Ratings.csv, and Users.csv with canonical book deduplication",
+      "Implemented a five-signal recommendation architecture: Bayesian Popularity, Content-Based TF-IDF, Co-Like Item KNN, Author Affinity, and User-Based CF",
+      "Added real-time Top-10 recommendation simulation by selected user or similar book",
+      "Compared models using Precision@10, Recall@10, MAP@10, NDCG@10, Novelty, Diversity, and Catalog Coverage",
+      "Designed a dark premium UI with book cards, cover images, rank badges, Plotly charts, and Streamlit caching"
+    ],
+    tags:["Streamlit","Python","Pandas","Scikit-learn","SciPy","Plotly","TF-IDF","Cosine Similarity","KNN","Collaborative Filtering","Hybrid Recommender","Book-Crossing"],
+    links:[
+      {label:"Live Dashboard →",url:"https://book-recommendation-system-dashboard.streamlit.app/",type:"primary"},
+      {label:"GitHub →",url:"https://github.com/zzazzz/book-recommendation-system",type:"secondary"}
+    ]
   }
 };
 
